@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoBattle Fast Slam Attack Mod</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+        .container {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .code-block {
+            background: #f4f4f4;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            position: relative;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .copy-btn:hover {
+            background: #764ba2;
+        }
+        .steps {
+            list-style: none;
+            padding: 0;
+            counter-reset: step-counter;
+        }
+        .steps li {
+            counter-increment: step-counter;
+            margin: 15px 0;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 5px;
+            border-left: 4px solid #667eea;
+        }
+        .steps li:before {
+            content: "步骤 " counter(step-counter);
+            display: block;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+        .controls {
+            background: #e8f4f8;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .control-item {
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 3px;
+        }
+        .status-messages {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+        }
+        .success {
+            color: #27ae60;
+        }
+        .info {
+            color: #3498db;
+        }
+        .warning {
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚔️ GoBattle Fast Slam Attack Mod</h1>
+        <p class="subtitle">快速下砸攻击模组 - 提升你的游戏体验</p>
+
+        <h2>📋 使用步骤</h2>
+        <ol class="steps">
+            <li>打开 <strong>https://gobattle.io</strong></li>
+            <li>按 <strong>F12</strong> 打开开发者工具</li>
+            <li>点击 <strong>Console</strong> 标签</li>
+            <li>复制下面的代码</li>
+            <li>粘贴到 Console 输入框</li>
+            <li>按 <strong>Enter</strong> 执行</li>
+        </ol>
+
+        <h2>💻 代码</h2>
+        <div class="code-block" id="codeBlock">
+(function() {
+    'use strict';
+    let isAttacking = false;
+    const SLAM_DURATION = 150;
+    let attackCount = 0;
+    
+    console.log('=== GoBattle Fast Slam Attack Mod ===');
+    console.log('Click to attack | Press X to cancel');
+    
+    document.addEventListener('click', function() {
+        if (isAttacking) return;
+        isAttacking = true;
+        attackCount++;
+        console.log('ATTACK #' + attackCount);
+        
+        setTimeout(() => { 
+            isAttacking = false;
+            console.log('ATTACK COMPLETE');
+        }, SLAM_DURATION);
+    }, true);
+    
+    document.addEventListener('keydown', function(e) {
+        if ((e.key === 'x' || e.key === 'X') && isAttacking) {
+            isAttacking = false;
+            console.log('CANCELLED');
+        }
+    }, true);
+    
+    console.log('MOD LOADED AND READY');
+})();
+        </div>
+        <button class="copy-btn" onclick="copyCode()">📋 复制代码</button>
+
+        <h2>🎮 游戏控制</h2>
+        <div class="controls">
+            <div class="control-item">
+                <strong>点击游戏区域</strong> → 开始攻击
+            </div>
+            <div class="control-item">
+                <strong>按 X 键</strong> → 取消攻击动画
+            </div>
+            <div class="control-item">
+                <strong>按 F12</strong> → 查看 Console 消息
+            </div>
+        </div>
+
+        <h2>📊 Console 消息</h2>
+        <div class="status-messages">
+            <div><span class="success">✅ MOD LOADED AND READY</span> - 模组加载成功</div>
+            <div><span class="info">ℹ️ ATTACK #1</span> - 攻击开始计数</div>
+            <div><span class="success">✅ ATTACK COMPLETE</span> - 攻击完成</div>
+            <div><span class="warning">⚠️ CANCELLED</span> - 攻击被取消</div>
+        </div>
+
+        <h2>❓ 常见问题</h2>
+        <div style="background: #fafafa; padding: 15px; border-radius: 5px;">
+            <p><strong>Q: Console 没有显示消息？</strong></p>
+            <p>A: 检查代码是否完整复制，确保按了 Enter，然后刷新页面重试</p>
+            
+            <p><strong>Q: 点击没有反应？</strong></p>
+            <p>A: 确保在游戏区域点击，检查 Console 是否有错误信息</p>
+            
+            <p><strong>Q: 如何卸载模组？</strong></p>
+            <p>A: 刷新页面即可卸载</p>
+        </div>
+
+        <hr style="margin: 30px 0; border: none; border-top: 1px solid #ddd;">
+        
+        <p style="text-align: center; color: #666;">
+            <strong>🎮 祝你游戏愉快！✨</strong><br>
+            如有问题，请访问 GitHub 仓库报告 Issue
+        </p>
+    </div>
+
+    <script>
+        function copyCode() {
+            const codeBlock = document.getElementById('codeBlock').textContent;
+            navigator.clipboard.writeText(codeBlock).then(() => {
+                alert('✅ 代码已复制到剪贴板！');
+            }).catch(() => {
+                alert('❌ 复制失败，请手动复制');
+            });
+        }
+    </script>
+</body>
+</html>
